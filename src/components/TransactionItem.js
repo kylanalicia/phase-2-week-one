@@ -24,3 +24,5 @@ function TransactionItem({ transaction,onDeleteTransaction }) {
         </tbody>
     )
 }
+
+export default TransactionItem;

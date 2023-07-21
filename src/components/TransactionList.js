@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import TransactionItem from "./TransactionItem";
+import TransactionItem from "./TransactionItem";
+// import SearchTransaction from "./SearchTransaction";
+// import AddTransactionForm from ".AddTransactionForm";
 
 function TransactionList() {
     const [transactions,setTransactions] = useState([]);
@@ -21,3 +23,5 @@ const TransactionList = transactions.filter((transaction) => {
     .toLowerCase()
     .includes(searchParam.toLowerCase());
 });
+
+export default TransactionList;
