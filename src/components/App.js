@@ -1,4 +1,6 @@
 import React from "react";
+import "./App.css"
+import TransactionList from './transactionList'
 
 function App() {
   return (
@@ -6,6 +8,7 @@ function App() {
       <div className="ui segment violet inverted">
         <h1>Andela Bank of Flatiron</h1>
       </div>
+      <TransactionList />
     </div>
   );
 }
