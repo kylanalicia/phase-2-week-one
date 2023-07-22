@@ -1,8 +1,8 @@
 import React from "react";
 
 function SearchTransaction({ searchParam, onTransactionSearch }) {
-  function handleTransactionSearch(evt) {
-    onTransactionSearch(evt.target.value);
+  function handleTransactionSearch(e) {
+    onTransactionSearch(e.target.value);
   }
 
   return (

@@ -1,46 +1,43 @@
 import React, { useEffect, useState } from "react";
 import TransactionItem from "./TransactionItem";
 import SearchTransaction from "./SearchTransaction";
-// import AddTransactionForm from ".AddTransactionForm";
+import AddTransactionForm from "./AddTransactionForm"; 
 
 function TransactionList() {
-    const [transactions,setTransactions] = useState([]);
-    const [searchParam,setSearchParam] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
 
-    useEffect(() => {
-        fetch(` http://localhost:8000/transactions`)
-        .then((response) => response.json())
-        .then((transactions) => setTransactions(transactions));
-    },[]);
-}
+  useEffect(() => {
+    fetch(`http://localhost:8000/transactions`)
+      .then((response) => response.json())
+      .then((transactions) => setTransactions(transactions));
+  }, []);
 
-function handleAddTransaction(newTransaction) {
+  function handleAddTransaction(newTransaction) {
     setTransactions([...transactions, newTransaction]);
   }
-  
-  const TransactionList = transactions.filter((transaction) => {
-    return transaction.description
-      .toLowerCase()
-      .includes(searchParam.toLowerCase());
-  });
-  
+
   function handleTransactionDelete(deletedTransaction) {
     const updatedTransactions = transactions.filter(
       (transaction) => transaction.id !== deletedTransaction.id
     );
     setTransactions(updatedTransactions);
   }
-  
-return (
+
+  const filteredTransactions = transactions.filter((transaction) =>
+    transaction.description.toLowerCase().includes(searchParam.toLowerCase())
+  );
+
+  return (
     <div>
       <div>
-        <SearchTransaction 
+        <SearchTransaction
           searchParam={searchParam}
           onTransactionSearch={setSearchParam}
         />
       </div>
       <AddTransactionForm onAddTransaction={handleAddTransaction} />
-  
+
       <table className="ui celled striped padded table">
         <thead className="ui center aligned header">
           <tr>
@@ -52,8 +49,8 @@ return (
           </tr>
         </thead>
         <tbody>
-          {transactionsList.map((transaction) => (
-            <TransactionItem 
+          {filteredTransactions.map((transaction) => (
+            <TransactionItem
               key={transaction.id}
               transaction={transaction}
               onDeleteTransaction={() => handleTransactionDelete(transaction)}
@@ -63,5 +60,6 @@ return (
       </table>
     </div>
   );
+}
 
 export default TransactionList;
