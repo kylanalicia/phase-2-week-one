@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TransactionItem from "./TransactionItem";
-// import SearchTransaction from "./SearchTransaction";
+import SearchTransaction from "./SearchTransaction";
 // import AddTransactionForm from ".AddTransactionForm";
 
 function TransactionList() {
@@ -15,13 +15,53 @@ function TransactionList() {
 }
 
 function handleAddTransaction(newTransaction) {
-    setTransactions([transactions,newTransaction]);
-}
-
-const TransactionList = transactions.filter((transaction) => {
+    setTransactions([...transactions, newTransaction]);
+  }
+  
+  const TransactionList = transactions.filter((transaction) => {
     return transaction.description
-    .toLowerCase()
-    .includes(searchParam.toLowerCase());
-});
+      .toLowerCase()
+      .includes(searchParam.toLowerCase());
+  });
+  
+  function handleTransactionDelete(deletedTransaction) {
+    const updatedTransactions = transactions.filter(
+      (transaction) => transaction.id !== deletedTransaction.id
+    );
+    setTransactions(updatedTransactions);
+  }
+  
+return (
+    <div>
+      <div>
+        <SearchTransaction 
+          searchParam={searchParam}
+          onTransactionSearch={setSearchParam}
+        />
+      </div>
+      <AddTransactionForm onAddTransaction={handleAddTransaction} />
+  
+      <table className="ui celled striped padded table">
+        <thead className="ui center aligned header">
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>DELETE?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactionsList.map((transaction) => (
+            <TransactionItem 
+              key={transaction.id}
+              transaction={transaction}
+              onDeleteTransaction={() => handleTransactionDelete(transaction)}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 
 export default TransactionList;
