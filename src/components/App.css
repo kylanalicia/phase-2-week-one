@@ -3,3 +3,24 @@
     text-align: center;
 }
 
+input {
+    width: 25%;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 1em;
+}
+
+.App {
+    text-align: center;
+}
+
+.App-header {
+    background-color: #222;
+    padding: 20px;
+    color: white;
+}

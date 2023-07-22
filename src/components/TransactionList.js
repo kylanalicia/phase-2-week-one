@@ -25,7 +25,7 @@ function TransactionList() {
   }
 
   const filteredTransactions = transactions.filter((transaction) =>
-    transaction.description.toLowerCase().includes(searchParam.toLowerCase())
+    transaction.description?.toLowerCase().includes(searchParam.toLowerCase())
   );
 
   return (
